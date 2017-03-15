@@ -7,10 +7,9 @@
 	String address = request.getParameter("address");
 	String username = request.getParameter("username");
 %>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-2.1.3.js"></script>
-	<script type="text/javascript"
-	src="js/chat.js"></script>
+<script type="text/javascript"src="http://code.jquery.com/jquery-2.1.3.js"></script>
+<script src="js/stomp.js"></script>
+<script type="text/javascript" src="js/chat.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="shortcut icon" href="css/pi.ico"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +28,8 @@ ws.onmessage = function(event) {
 	if (event.data instanceof Blob) {
 		reader = new FileReader();
 		reader.onload = function() {
-			readerHandler(reader);
+			var message = reader.result;
+			Handler(message);
 		};
 		reader.readAsText(event.data);
 	}
@@ -49,6 +49,8 @@ ws.onclose = function() {
 			<button id="createBtn" class="Buttons" onclick="createPop()">Create</button>
 			<button id="leaveBtn" class="Buttons" style="display: none;"
 				onclick="roomLeave()">Leave</button>
+				<button id="pauseBtn" class="Buttons" style="display: none;"
+				onclick="roomPause()">Pause</button>
 			<button id="destroyBtn" class="Buttons" style="display: none;" onclick="roomDestroy()">Destroy</button>
 		</div>
 		<div id="userList" align="center">

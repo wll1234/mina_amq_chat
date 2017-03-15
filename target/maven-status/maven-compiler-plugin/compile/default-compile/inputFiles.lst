@@ -1,1 +1,13 @@
-C:\MINA\MinaChat\src\snippet\Snippet.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketCodecFactory.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketCodecPacket.java
+C:\MINA\MinaChat\src\mina\chat\BogusSslContextFactory.java
+C:\MINA\MinaChat\src\mina\chat\ChatProtocolHandler.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketEncoder.java
+C:\MINA\MinaChat\src\mina\chat\BogusTrustManagerFactory.java
+C:\MINA\MinaChat\src\mina\chat\filter\Base64.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketUtils.java
+C:\MINA\MinaChat\src\mina\chat\Main.java
+C:\MINA\MinaChat\src\mina\chat\ChatCommand.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketHandShakeResponse.java
+C:\MINA\MinaChat\src\mina\chat\filter\WebSocketDecoder.java
+C:\MINA\MinaChat\src\mina\chat\Room.java

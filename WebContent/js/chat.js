@@ -1,8 +1,8 @@
 /**
  * 
  */
-function readerHandler(reader){
-	var message = reader.result;
+var client;
+function Handler(message){
 	var result = message.split(" ");
 	var status = result[1];
 	var theCommand = result[0];
@@ -23,16 +23,21 @@ function readerHandler(reader){
 			$("#chatArea").empty();
 			$("#chatInputBox").attr("disabled", false);
 			$("#leaveBtn").show();
+			$("#pauseBtn").show();
 			$("#createBtn").hide();
-			var message;
-			message = result2String(result);
-			$("#chatArea").append(message);
+			client = Stomp.client("ws://localhost:61614");
+			client.connect("admin","password", function(frame){
+				client.subscribe("/"+result[2]+"/"+result[3], function(message) {
+					$("#chatArea").append(message.body + "<br>");
+		        });
+			});
 			break;
 		case "LEAVE":
 			$("#chatArea").empty();
 			$("#chatInputBox").attr("disabled", true);
 			$("#destroyBtn").hide();
 			$("#leaveBtn").hide();
+			$("#pauseBtn").hide();
 			$("#createBtn").show();
 			var message;
 			message = result2String(result);
@@ -59,17 +64,26 @@ function readerHandler(reader){
 		case "DESTROY":
 			alert("This room is desroyed.");
 			break;
+		case "PAUSE":
+			client.disconnect(function() {
+
+	        });
+			break;
 		}
 	} else if (status == "FAIL") {
 		switch (theCommand) {
 		case "LOGIN":
-			
+			var message;
+			message = result2String(result);
+			alert(message);
+			window.location.replace('login.html');
 			break;
 		case "JOIN":
 			alert("Room Join Failed, Room does not exist or full.");
 			$("#chatArea").empty();
 			$("#chatInputBox").attr("disabled", true);
 			$("#leaveBtn").hide();
+			$("#pauseBtn").hide();
 			$("#createBtn").show();
 			var message;
 			message = result2String(result);
@@ -80,7 +94,7 @@ function readerHandler(reader){
 			break;
 		}
 	}
-	return console.log(reader.result);
+	return console.log(message);
 }
 function result2String(result){
 	var i, len, message;
@@ -96,6 +110,9 @@ function roomJoin(no) {
 }
 function roomLeave() {
 	ws.send("LEAVE");
+}
+function roomPause() {
+	ws.send("PAUSE");
 }
 function chatEvent(e) {
 	if (e.keyCode == 13) {

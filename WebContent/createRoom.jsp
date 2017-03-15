@@ -10,7 +10,6 @@
 <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
 <link rel="shortcut icon" href="css/pi.ico"/>
 <title>Room Create</title>
-
 <link rel="stylesheet" type="text/css" href="css/ten.css">
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -18,10 +17,10 @@
 	});
 	
 	function roomEvent(){
-		
 		var size = $('#size').val();
 		var title = $('#title').val();
-		
+		if(size < 2 && title == '')
+			return;
 		opener.parent.createRoom(size,title);
 		self.close();
 	}

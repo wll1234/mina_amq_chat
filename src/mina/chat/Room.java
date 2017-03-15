@@ -1,5 +1,9 @@
 package mina.chat;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.mina.core.session.IoSession;
 
 public class Room {
@@ -7,6 +11,8 @@ public class Room {
 	private int size;
 	private String title;
 	private int roomID;
+	private final Set<IoSession> attends;
+	private final Set<IoSession> pauses;
 	
 	public IoSession getAdminUser() {
 		return adminUser;
@@ -37,12 +43,37 @@ public class Room {
 		this.size = size;
 		this.title = title;
 		this.roomID = roomID;
+		this.attends = Collections.synchronizedSet(new HashSet<IoSession>());
+		this.pauses = Collections.synchronizedSet(new HashSet<IoSession>());
 	}
 	public Room(){
 		this.adminUser = null;
 		this.size = 100;
 		this.title = "";
 		this.roomID = 0;
+		this.attends = Collections.synchronizedSet(new HashSet<IoSession>());
+		this.pauses = Collections.synchronizedSet(new HashSet<IoSession>());
 	}
-	
+	public Set<IoSession> getAttends() {
+		return attends;
+	}
+	public Set<IoSession> getPauses() {
+		return pauses;
+	}
+	public void addAttend(IoSession session){
+		if(pauses.contains(session))
+			pauses.remove(session);
+		attends.add(session);
+	}
+	public void removeAttend(IoSession session){
+		attends.remove(session);
+	}
+	public void addPauses(IoSession session){
+		if(attends.contains(session))
+			attends.remove(session);
+		pauses.add(session);
+	}
+	public void removePause(IoSession session){
+		pauses.remove(session);
+	}
 }

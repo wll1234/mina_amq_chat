@@ -1,0 +1,17 @@
+mina\chat\filter\Base64$OutputStream.class
+mina\chat\filter\WebSocketDecoder.class
+mina\chat\filter\WebSocketUtils.class
+mina\chat\filter\WebSocketCodecPacket.class
+mina\chat\Main.class
+mina\chat\filter\Base64$InputStream.class
+mina\chat\filter\Base64.class
+mina\chat\filter\WebSocketCodecFactory.class
+mina\chat\ChatCommand.class
+mina\chat\ChatProtocolHandler.class
+mina\chat\BogusSslContextFactory.class
+mina\chat\BogusTrustManagerFactory.class
+mina\chat\filter\WebSocketHandShakeResponse.class
+mina\chat\filter\Base64$1.class
+mina\chat\Room.class
+mina\chat\BogusTrustManagerFactory$1.class
+mina\chat\filter\WebSocketEncoder.class
